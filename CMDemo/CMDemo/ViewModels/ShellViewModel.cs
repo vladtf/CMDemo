@@ -109,7 +109,7 @@ namespace CMDemo.ViewModels
         //Events binded to buttons "LoadPageOne" and "LoadPageTwo"
         public void LoadPageOne()
         {
-            ActivateItem(new FirstChildViewModel());
+            ActivateItem(new FirstChildViewModel(SelectedPerson));
         }
 
         public void LoadPageTwo()
