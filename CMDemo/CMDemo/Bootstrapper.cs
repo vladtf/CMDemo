@@ -54,6 +54,11 @@ namespace CMDemo
             return _container.GetAllInstances(service);
         }
 
+        public SimpleContainer GetSimpleContainer()
+        {
+            return _container;
+        }
+
         protected override void BuildUp(object instance)
         {
             _container.BuildUp(instance);

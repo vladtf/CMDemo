@@ -1,6 +1,8 @@
 ﻿using Caliburn.Micro;
 using CMDemo.Models;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CMDemo.ViewModels
 {
@@ -16,9 +18,10 @@ namespace CMDemo.ViewModels
         private PersonModel _person;
 
         private SecondChildViewModel _secondChildViewModel;
-        public ShellViewModel(PersonModel person,SecondChildViewModel secondChildViewModel)
+        public ShellViewModel(PersonModel personModel,SecondChildViewModel secondChildViewModel)
         {
-            _person = person.person;
+            _person = personModel;
+
             //Adds new items to list people
             People.Add(new PersonModel { FirstName = "Will", LastName = "Smith" });
             People.Add(new PersonModel { FirstName = "Sue", LastName = "Johnes" });
@@ -85,6 +88,7 @@ namespace CMDemo.ViewModels
             { 
                 personModel = value;
                 NotifyOfPropertyChange(() => SelectedPerson);
+                NotifyOfPropertyChange(() => _secondChildViewModel.Person);
             }
         }
 
