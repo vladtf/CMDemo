@@ -13,12 +13,19 @@ namespace CMDemo.ViewModels
         private PersonModel personModel;
         private BindableCollection<PersonModel> _people = new BindableCollection<PersonModel>();
 
-        public ShellViewModel()
+        private PersonModel _person;
+
+        private SecondChildViewModel _secondChildViewModel;
+        public ShellViewModel(PersonModel person,SecondChildViewModel secondChildViewModel)
         {
+            _person = person.person;
             //Adds new items to list people
             People.Add(new PersonModel { FirstName = "Will", LastName = "Smith" });
             People.Add(new PersonModel { FirstName = "Sue", LastName = "Johnes" });
             People.Add(new PersonModel { FirstName = "Robert", LastName = "Jackson" });
+
+            //get from containter secondChildview
+            _secondChildViewModel = secondChildViewModel;
         }
 
         //Binded to FirstName textbox.
@@ -114,7 +121,8 @@ namespace CMDemo.ViewModels
 
         public void LoadPageTwo()
         {
-            ActivateItem(new SecondChildViewModel());
+            _secondChildViewModel.Person = SelectedPerson;
+            ActivateItem(_secondChildViewModel);
         }
 
     }

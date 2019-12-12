@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using CMDemo.Models;
 using CMDemo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
+
 namespace CMDemo
 {
     public class Bootstrapper : BootstrapperBase
     {
+
+        private SimpleContainer _container = new SimpleContainer();
         public Bootstrapper()
         {
             Initialize();
@@ -22,5 +26,39 @@ namespace CMDemo
         {
             DisplayRootViewFor<ShellViewModel>();
         }
+
+        protected override void Configure()
+        {
+            _container.Singleton<IWindowManager, WindowManager>();
+            _container.Singleton<PersonModel>();
+
+
+
+            GetType().Assembly.GetTypes()
+                .Where(type => type.IsClass)
+                .Where(type => type.Name.EndsWith("ViewModel"))
+                .ToList()
+                .ForEach(viewModelType => _container.RegisterPerRequest(
+                    viewModelType, viewModelType.ToString(), viewModelType));
+
+        }
+
+
+        protected override object GetInstance(Type service, string key)
+        {
+            return _container.GetInstance(service, key);
+        }
+
+        protected override IEnumerable<object> GetAllInstances(Type service)
+        {
+            return _container.GetAllInstances(service);
+        }
+
+        protected override void BuildUp(object instance)
+        {
+            _container.BuildUp(instance);
+        }
+
+
     }
 }
