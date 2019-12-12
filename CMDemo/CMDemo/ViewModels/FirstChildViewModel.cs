@@ -11,16 +11,17 @@ namespace CMDemo.ViewModels
     public class FirstChildViewModel:Screen
     {
 
+        //Gets the selected person from shellview
         public FirstChildViewModel(PersonModel personModel)
         {
-            this.personModel = personModel;
+            _personModel = personModel;
         }
 
-        private PersonModel personModel;
+        private PersonModel _personModel;
 
         public PersonModel PersonModel
         {
-            get { return personModel; }
+            get { return _personModel; }
         }
 
     }

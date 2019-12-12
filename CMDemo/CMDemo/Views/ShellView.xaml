@@ -52,7 +52,10 @@
         <Button x:Name="LoadPageTwo" Grid.Column="2" Grid.Row="5">Load Second Page</Button>
         
         <!-- Row 6 -->
-        <ContentControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5" 
+        <!-- Row 6 -->
+        <ContentControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" 
                         x:Name="ActiveItem"/>
+        <ListBox Grid.Row="6" Grid.Column="3" ItemsSource="{Binding Path=People,Mode=OneWay}"
+                 DisplayMemberPath="FirstName" SelectedItem="{Binding Path=SelectedPerson,Mode=OneWayToSource}"/>
     </Grid>
 </Window>
