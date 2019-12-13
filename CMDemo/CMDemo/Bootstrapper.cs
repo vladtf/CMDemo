@@ -29,11 +29,10 @@ namespace CMDemo
 
         protected override void Configure()
         {
-            _container.Singleton<IWindowManager, WindowManager>();
-            _container.Singleton<PersonModel>();
-
-
-
+            _container
+                .Singleton<IWindowManager, WindowManager>()
+                .Singleton<PersonModel, PersonModel>();
+            
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))

@@ -12,13 +12,15 @@ namespace CMDemo.ViewModels
         //Variables that we won't be changed/got directly ( only by using seters of geters).
         private string _firstName = "Will";
         private string _lastName;
-        private PersonModel personModel;
         private BindableCollection<PersonModel> _people = new BindableCollection<PersonModel>();
 
         private PersonModel _person;
 
+        private PersonModel personModel;
+
         private SecondChildViewModel _secondChildViewModel;
-        public ShellViewModel(PersonModel personModel,SecondChildViewModel secondChildViewModel)
+        private ThirdChildViewModel _thirdChildViewModel;
+        public ShellViewModel(PersonModel personModel,SecondChildViewModel secondChildViewModel,ThirdChildViewModel thirdChildViewModel)
         {
             _person = personModel;
 
@@ -29,6 +31,8 @@ namespace CMDemo.ViewModels
 
             //get from containter secondChildview
             _secondChildViewModel = secondChildViewModel;
+            _thirdChildViewModel = thirdChildViewModel;
+
         }
 
         //Binded to FirstName textbox.
@@ -83,10 +87,12 @@ namespace CMDemo.ViewModels
         //Binded to selected item form ComboBox.
         public PersonModel SelectedPerson
         {
-            get { return personModel; }
+            get { return _person; }
             set 
-            { 
+            {
                 personModel = value;
+                _person.LastName = value.LastName;
+                _person.FirstName = value.FirstName;
                 NotifyOfPropertyChange(() => SelectedPerson);
                 NotifyOfPropertyChange(() => _secondChildViewModel.Person);
             }
@@ -127,6 +133,11 @@ namespace CMDemo.ViewModels
         {
             _secondChildViewModel.Person = SelectedPerson;
             ActivateItem(_secondChildViewModel);
+        }
+
+        public void LoadPageThree()
+        {
+            ActivateItem(_thirdChildViewModel);
         }
 
     }

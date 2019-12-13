@@ -40,9 +40,10 @@
 
         <!-- Row 3 -->
         <ComboBox Grid.Row="3" Grid.Column="1" x:Name="People"
-                  SelectedItem="{Binding Path=SelectedPerson,Mode=OneWayToSource}"
+                  SelectedItem="{Binding Path=SelectedPerson}"
                   DisplayMemberPath="FirstName"/>
         <TextBlock Grid.Row="3" Grid.Column="2" Name="SelectedPerson_LastName"/>
+        <TextBlock Grid.Row="3" Grid.Column="3" Name="SelectedPerson_FirstName"/>
         
         <!-- Row 4 -->
         <Button Grid.Row="4" Grid.Column="1" x:Name="ClearText">Clear Names</Button>
@@ -50,6 +51,7 @@
         <!-- Row 5 -->
         <Button x:Name="LoadPageOne" Grid.Column="1" Grid.Row="5">Load First Page</Button>
         <Button x:Name="LoadPageTwo" Grid.Column="2" Grid.Row="5">Load Second Page</Button>
+        <Button x:Name="LoadPageThree" Grid.Column="3" Grid.Row="5">Load Third Page</Button>
         
         <!-- Row 6 -->
         <!-- Row 6 -->

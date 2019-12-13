@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace CMDemo.ViewModels
 {
-    public class SecondChildViewModel:Screen
+    public class ThirdChildViewModel : Screen
     {
-        public SecondChildViewModel()
+        public ThirdChildViewModel(PersonModel personModel)
         {
+            _person = personModel;
         }
 
         private PersonModel _person;
@@ -21,9 +22,11 @@ namespace CMDemo.ViewModels
             get { return _person; }
             set 
             { 
-                _person = value;
+                _person = value;                
             }
         }
+
+        
 
     }
 }
