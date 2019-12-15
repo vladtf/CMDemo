@@ -21,8 +21,12 @@ namespace CMDemo.ViewModels
 
         private PersonModel _selectedPerson;
 
-        public ShellViewModel()
+        private ThirdChildViewModel _thirdChild;
+
+        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel)
         {
+            _thirdChild = thirdChildViewModel;
+            _selectedPerson = personModel;
 
             //Adds new items to list people
             People.Add(new PersonModel { FirstName = "Will", LastName = "Smith" });
@@ -88,7 +92,8 @@ namespace CMDemo.ViewModels
             set
             {
                 _selectedPerson = value;
-                IoC.GetInstance(typeof(PersonModel), "");
+                ContainerHelper.RegisterInstance(value);
+                _thirdChild.UpdateThis();
                 NotifyOfPropertyChange(() => SelectedPerson);
             }
         }
@@ -135,29 +140,36 @@ namespace CMDemo.ViewModels
 
         public void LoadPageThree()
         {
-            ThirdChildViewModel thirdChild = (ThirdChildViewModel) IoC.GetInstance(typeof(ThirdChildViewModel), null);
-            ActivateItem(thirdChild);
+            ActivateItem(_thirdChild);
         }
 
 
         //a void method using lambda expression
         //public void ShowMessage() => MessageBox.Show("Using lambda expression.");
 
+
+        //For debugging container features.
         public void ShowMessage()
         {
 
-            SimpleContainer simpleContainer = (SimpleContainer)IoC.GetInstance(typeof(SimpleContainer), null);
+            //SimpleContainer simpleContainer = (SimpleContainer)IoC.GetInstance(typeof(SimpleContainer), null);
 
-            PersonModel personModel1 = new PersonModel { FirstName = "asdtg1" };
-            PersonModel personModel2 = new PersonModel { FirstName = "asdtg2" };
+            //PersonModel personModel3 = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
 
-            ContainerHelper.RegisterInstance(typeof(PersonModel), personModel1);
-            ContainerHelper.RegisterInstance(typeof(PersonModel), personModel2);
-            ////simpleContainer.BuildUp(personModel1);
-            //simpleContainer.RegisterInstance(typeof(PersonModel), "person", personModel1);
-            //simpleContainer.UnregisterHandler(typeof(PersonModel), "person");
-            //simpleContainer.RegisterInstance(typeof(PersonModel), "person", personModel2);
-            PersonModel personModel = (PersonModel) IoC.GetInstance(typeof(PersonModel),null);
+            //personModel3.FirstName = "3";
+
+            //personModel3 = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
+
+            //PersonModel personModel1 = new PersonModel { FirstName = "asdtg1" };
+            //PersonModel personModel2 = new PersonModel { FirstName = "asdtg2" };
+
+            //ContainerHelper.RegisterInstance(personModel1);
+            //ContainerHelper.RegisterInstance(personModel2);
+            //////simpleContainer.BuildUp(personModel1);
+            ////simpleContainer.RegisterInstance(typeof(PersonModel), "person", personModel1);
+            ////simpleContainer.UnregisterHandler(typeof(PersonModel), "person");
+            ////simpleContainer.RegisterInstance(typeof(PersonModel), "person", personModel2);
+            //PersonModel personMode4 = (PersonModel) IoC.GetInstance(typeof(PersonModel),null);
             Console.WriteLine();
         }
 

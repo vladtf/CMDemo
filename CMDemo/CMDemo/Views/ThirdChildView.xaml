@@ -17,12 +17,12 @@
         </Grid.RowDefinitions>
 
         <!-- First row -->
-        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="40" Text="{Binding Path=FirstName, Mode=TwoWay}"></TextBox>
+        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="40" Name="Person_FirstName"></TextBox>
         
         <!-- Second row -->
-        <TextBox Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Margin="0,20,0,0" >
-            Last Name</TextBox>
-        
+        <TextBox Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Margin="0,20,0,0" 
+                 Name="Person_LastName"/>
+
         <!-- Third row -->
         <Button x:Name="UpdateThis" Grid.Row="3" MinHeight="50"/>
     </Grid>

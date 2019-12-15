@@ -6,36 +6,26 @@ namespace CMDemo.ViewModels
 {
     public class ThirdChildViewModel : Screen
     {
-        public ThirdChildViewModel()
+        public ThirdChildViewModel(PersonModel personModel)
         {
+            _person = personModel;
+            _person.FirstName = "thirdchild";
         }
-
-        private PersonModel _person = (PersonModel) IoC.GetInstance(typeof(PersonModel),"");
-
 
         public void UpdateThis()
         {
-            Console.WriteLine(_person);
+             _person = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
+            NotifyOfPropertyChange(nameof(Person));
+             Console.WriteLine(_person);
         }
 
-        //public string FirstName
-        //{
-        //    get { return _person.FirstName; }
-        //    set
-        //    {
-        //        _person.FirstName = value;
-        //        NotifyOfPropertyChange(()=>FirstName);
-        //    }
-        //}
+        private PersonModel _person;
 
-        //public string LastName
-        //{
-        //    get { return _person.LastName; }
-        //    set 
-        //    { 
-        //        _person.FirstName = value;
-        //        NotifyOfPropertyChange(LastName);
-        //    }
-        //}
+        public PersonModel Person
+        {
+            get { return _person; }
+            set { _person = value; }
+        }
+
     }
 }
