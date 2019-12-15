@@ -3,6 +3,7 @@ using CMDemo.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace CMDemo.ViewModels
 {
@@ -46,7 +47,7 @@ namespace CMDemo.ViewModels
             {
                 _firstName = value;
                 NotifyOfPropertyChange(() => FirstName);
-                NotifyOfPropertyChange(() => FullName);
+                NotifyOfPropertyChange(nameof(FullName));
             }
         }
 
@@ -94,7 +95,6 @@ namespace CMDemo.ViewModels
                 _person.LastName = value.LastName;
                 _person.FirstName = value.FirstName;
                 NotifyOfPropertyChange(() => SelectedPerson);
-                NotifyOfPropertyChange(() => _secondChildViewModel.Person);
             }
         }
 
@@ -139,6 +139,12 @@ namespace CMDemo.ViewModels
         {
             ActivateItem(_thirdChildViewModel);
         }
+
+
+        //a void method using lambda expression
+        public void ShowMessage() => MessageBox.Show("Using lambda expression.");
+
+
 
     }
 }

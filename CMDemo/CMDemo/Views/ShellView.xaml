@@ -5,12 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CMDemo.Views"
         mc:Ignorable="d" FontSize="30"
-        Title="ShellView" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ShellView" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
     
     <!-- The window shown on startup -->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
@@ -31,6 +32,7 @@
 
         <!-- Row 1 -->
         <TextBlock Text="{Binding Path=FullName, Mode=OneWay}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"></TextBlock>
+        <Button x:Name="ShowMessage" Grid.Row="1" Grid.Column="5" MinWidth="100" Content="Show"/>
 
 
         <!-- Row 2 -->
