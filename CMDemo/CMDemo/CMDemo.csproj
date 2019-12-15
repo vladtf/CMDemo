@@ -77,6 +77,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\ContainerHelper.cs" />
+    <Compile Include="Helpers\PersonModelSetter.cs" />
+    <Compile Include="Models\IPersonModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="ViewModels\FirstChildViewModel.cs" />
     <Compile Include="ViewModels\SecondChildViewModel.cs" />

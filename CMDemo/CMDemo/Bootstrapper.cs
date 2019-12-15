@@ -12,10 +12,11 @@ using Autofac;
 
 namespace CMDemo
 {
-    public class Bootstrapper : AutofacBootstrapper<ShellViewModel>
+    public class Bootstrapper : BootstrapperBase
     {
 
-        //private SimpleContainer _container = new SimpleContainer();
+        private SimpleContainer _container = new SimpleContainer();
+
         public Bootstrapper()
         {
             Initialize();
@@ -28,60 +29,58 @@ namespace CMDemo
             DisplayRootViewFor<ShellViewModel>();
         }
 
-        protected override void ConfigureBootstrapper()
+        //protected override void ConfigureBootstrapper()
+        //{
+        //    base.ConfigureBootstrapper();
+        //    EnforceNamespaceConvention = true;
+        //}
+
+        //protected override void ConfigureContainer(ContainerBuilder builder)
+        //{
+
+        //    builder.RegisterType<ShellViewModel>().SingleInstance();
+        //    builder.RegisterType<FirstChildViewModel>().SingleInstance();
+        //    builder.RegisterType<SecondChildViewModel>().SingleInstance();
+        //    builder.RegisterType<ThirdChildViewModel>().SingleInstance();
+        //    builder.RegisterType<PersonModel>().SingleInstance();
+
+        //}
+
+
+
+        protected override void Configure()
         {
-            base.ConfigureBootstrapper();
-            EnforceNamespaceConvention = true;
+            _container.Instance(_container);
+
+            _container
+                .Singleton<IWindowManager, WindowManager>()
+                .Singleton<ShellViewModel>();
+
+
         }
 
-        protected override void ConfigureContainer(ContainerBuilder builder)
-        {
 
-            builder.RegisterType<ShellViewModel>().SingleInstance();
-            builder.RegisterType<FirstChildViewModel>().SingleInstance();
-            builder.RegisterType<SecondChildViewModel>().SingleInstance();
-            builder.RegisterType<ThirdChildViewModel>().SingleInstance();
-            builder.RegisterType<PersonModel>().SingleInstance();
+        protected override object GetInstance(Type service, string key)
+        {
+            return _container.GetInstance(service, key);
+        }
+
+        protected override IEnumerable<object> GetAllInstances(Type service)
+        {
+            return _container.GetAllInstances(service);
+        }
+
+        public SimpleContainer GetSimpleContainer()
+        {
+            return _container;
+        }
+
+        protected override void BuildUp(object instance)
+        {
+            _container.BuildUp(instance);
+        }
 
         }
 
-
-        //protected override void Configure()
-        //{
-        //    _container
-        //        .Singleton<IWindowManager, WindowManager>()
-        //        .Singleton<PersonModel, PersonModel>();
-
-        //    GetType().Assembly.GetTypes()
-        //        .Where(type => type.IsClass)
-        //        .Where(type => type.Name.EndsWith("ViewModel"))
-        //        .ToList()
-        //        .ForEach(viewModelType => _container.RegisterPerRequest(
-        //            viewModelType, viewModelType.ToString(), viewModelType));
-
-        //}
-
-
-        //protected override object GetInstance(Type service, string key)
-        //{
-        //    return _container.GetInstance(service, key);
-        //}
-
-        //protected override IEnumerable<object> GetAllInstances(Type service)
-        //{
-        //    return _container.GetAllInstances(service);
-        //}
-
-        //public SimpleContainer GetSimpleContainer()
-        //{
-        //    return _container;
-        //}
-
-        //protected override void BuildUp(object instance)
-        //{
-        //    _container.BuildUp(instance);
-        //}
-
-
-    }
 }
+

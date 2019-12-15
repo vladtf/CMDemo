@@ -11,13 +11,19 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="40" x:Name="Person_FirstName">
-            First Name</TextBox>
-        <TextBox Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Margin="0,20,0,0" x:Name="Person_LastName">
+        <!-- First row -->
+        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="40" Text="{Binding Path=FirstName, Mode=TwoWay}"></TextBox>
+        
+        <!-- Second row -->
+        <TextBox Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Margin="0,20,0,0" >
             Last Name</TextBox>
+        
+        <!-- Third row -->
+        <Button x:Name="UpdateThis" Grid.Row="3" MinHeight="50"/>
     </Grid>
 </UserControl>

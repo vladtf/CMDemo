@@ -1,19 +1,18 @@
 ﻿namespace CMDemo.Models
 {
-    public class PersonModel
+    public class PersonModel : IPersonModel
     {
         //A model that keeps the information about a person.
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        public PersonModel person
+        public string FullName
         {
             get
             {
-                PersonModel model = new PersonModel { FirstName = "Vlad", LastName = "Tf" };
-                return model;
+                return FirstName + " " + LastName;
             }
+        }
     }
-}
 }

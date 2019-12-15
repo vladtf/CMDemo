@@ -42,10 +42,10 @@
 
         <!-- Row 3 -->
         <ComboBox Grid.Row="3" Grid.Column="1" x:Name="People"
-                  SelectedItem="{Binding Path=SelectedPerson}"
-                  DisplayMemberPath="FirstName"/>
-        <TextBlock Grid.Row="3" Grid.Column="2" Name="SelectedPerson_LastName"/>
-        <TextBlock Grid.Row="3" Grid.Column="3" Name="SelectedPerson_FirstName"/>
+                  SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"
+                  DisplayMemberPath="FullName"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Name="SelectedPerson_LastName"/>
+        <TextBox Grid.Row="3" Grid.Column="3" Name="SelectedPerson_FirstName"/>
         
         <!-- Row 4 -->
         <Button Grid.Row="4" Grid.Column="1" x:Name="ClearText">Clear Names</Button>
@@ -59,7 +59,7 @@
         <!-- Row 6 -->
         <ContentControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" 
                         x:Name="ActiveItem"/>
-        <ListBox Grid.Row="6" Grid.Column="3" ItemsSource="{Binding Path=People,Mode=OneWay}"
-                 DisplayMemberPath="FirstName" SelectedItem="{Binding Path=SelectedPerson,Mode=OneWayToSource}"/>
+        <ListBox Grid.Row="6" Grid.Column="3" ItemsSource="{Binding Path=People,Mode=TwoWay}"
+                 DisplayMemberPath="FullName" SelectedItem="{Binding Path=SelectedPerson,Mode=TwoWay}"/>
     </Grid>
 </Window>
