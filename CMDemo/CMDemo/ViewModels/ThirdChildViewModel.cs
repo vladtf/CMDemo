@@ -21,8 +21,9 @@ namespace CMDemo.ViewModels
         {
             get { return _person; }
             set 
-            { 
-                _person = value;                
+            {
+                _person = value;
+                NotifyOfPropertyChange(nameof(Person));
             }
         }
 
