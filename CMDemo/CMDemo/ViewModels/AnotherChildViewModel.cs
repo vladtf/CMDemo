@@ -23,7 +23,7 @@ namespace CMDemo.ViewModels
         public void Handle(PersonModel message)
         {
             Person = message;
-            NavigateToAnotherView navigateToMessage = new NavigateToAnotherView();
+            NavigateToMessage navigateToMessage = new NavigateToMessage(NavigateToEnum.AnotherChildView);
             _eventAggregator.PublishOnUIThread(navigateToMessage);
         }
 

@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<NavigateToAnotherView>,IHandle<object>
+    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<NavigateToMessage>,IHandle<object>
     {
 
         //Variables that we won't be changed/got directly ( only by using seters of geters).
@@ -150,7 +150,8 @@ namespace CMDemo.ViewModels
 
         public void LoadPageThree()
         {
-            ActivateItem(_thirdChild);
+            NavigateToMessage navigateTo = new NavigateToMessage(NavigateToEnum.ThirdChildView);
+            _eventAggregator.PublishOnUIThread(navigateTo);
         }
 
         public bool CanLoadAnotherPage
@@ -225,16 +226,36 @@ namespace CMDemo.ViewModels
             //MessageBox.Show("Mouse leaved.");
         }
 
-        public void Handle(NavigateToAnotherView message)
-        {
-            ActivateItem(_anotherChildViewModel);
-        }
 
+
+        //Old version.
+
+        ////public void Handle(NavigateToAnotherView message)
+        ////{
+        ////    ActivateItem(_anotherChildViewModel);
+        ////}
+
+        //Universal way to navigate.
+        public void Handle(NavigateToMessage message)
+        {
+            switch(message.NavigateToEnum)
+            {
+                case NavigateToEnum.AnotherChildView:
+                    ActivateItem(_anotherChildViewModel);
+                    break;
+                case NavigateToEnum.ThirdChildView:
+                    ActivateItem(_thirdChild);
+                    break;
+               
+            }
+        }
         public void Handle(object message)
         {
             //Don't use this way, create bugs and need to use Async publishing, better handle for different
             //activating different message or try handle all the activation at the same time ( not suggested ).
             ////ActivateItem(object);
         }
+
+        
     }
 }
