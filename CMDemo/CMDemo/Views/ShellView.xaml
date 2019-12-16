@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:CMDemo.Views"
         mc:Ignorable="d" FontSize="30"
         Title="ShellView" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
@@ -32,7 +34,13 @@
 
         <!-- Row 1 -->
         <TextBlock Text="{Binding Path=FullName, Mode=OneWay}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"></TextBlock>
-        <Button x:Name="ShowMessage" Grid.Row="1" Grid.Column="5" MinWidth="100" Content="Show"/>
+        <Button  Grid.Row="1" Grid.Column="5" MinWidth="100" Content="Show">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <cal:ActionMessage MethodName="ShowMessage"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
 
 
         <!-- Row 2 -->
@@ -43,7 +51,13 @@
         <!-- Row 3 -->
         <ComboBox Grid.Row="3" Grid.Column="1" x:Name="People"
                   SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"
-                  DisplayMemberPath="FullName"/>
+                  DisplayMemberPath="FullName">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <cal:ActionMessage MethodName="PeopleSelecting"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ComboBox>
         <TextBox Grid.Row="3" Grid.Column="2" Name="SelectedPerson_LastName"/>
         <TextBox Grid.Row="3" Grid.Column="3" Name="SelectedPerson_FirstName"/>
         

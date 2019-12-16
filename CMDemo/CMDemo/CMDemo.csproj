@@ -80,6 +80,7 @@
     <Compile Include="Helpers\ContainerHelper.cs" />
     <Compile Include="Helpers\PersonModelSetter.cs" />
     <Compile Include="Models\PersonModel.cs" />
+    <Compile Include="Models\ToUpdate.cs" />
     <Compile Include="ViewModels\FirstChildViewModel.cs" />
     <Compile Include="ViewModels\SecondChildViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

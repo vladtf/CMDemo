@@ -23,8 +23,11 @@ namespace CMDemo.ViewModels
 
         private ThirdChildViewModel _thirdChild;
 
-        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel)
+        private ToUpdate _toUpdate;
+
+        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, ToUpdate toUpdate)
         {
+            _toUpdate = toUpdate;
             _thirdChild = thirdChildViewModel;
             _selectedPerson = personModel;
 
@@ -92,9 +95,18 @@ namespace CMDemo.ViewModels
             set
             {
                 _selectedPerson = value;
-                ContainerHelper.RegisterInstance(value);
-                _thirdChild.UpdateThis();
-                NotifyOfPropertyChange(() => SelectedPerson);
+                NotifyOfPropertyChange(() => SelectedPerson); 
+            }
+        }
+
+
+        public bool NeedUpdate
+        {
+            get { return _toUpdate.NeedUpdate; }
+            set 
+            {
+                _toUpdate.NeedUpdate = value;
+                NotifyOfPropertyChange(() => NeedUpdate);
             }
         }
 
@@ -124,7 +136,7 @@ namespace CMDemo.ViewModels
         }
 
 
-        //Events binded to buttons "LoadPageOne" and "LoadPageTwo"
+        //Events binded to buttons
         public void LoadPageOne()
         {
             ActivateItem(new FirstChildViewModel(SelectedPerson));
@@ -133,14 +145,20 @@ namespace CMDemo.ViewModels
         public void LoadPageTwo()
         {
             ActivateItem(null);
-            SecondChildViewModel secondChild = (SecondChildViewModel)IoC.GetInstance(typeof(SecondChildViewModel), "");
-            secondChild.Person = SelectedPerson;
-            ActivateItem(secondChild);
+            SecondChildViewModel _secondChild = IoC.Get<SecondChildViewModel>();
+            _secondChild.Person = SelectedPerson;
+            ActivateItem(_secondChild);
         }
 
         public void LoadPageThree()
         {
             ActivateItem(_thirdChild);
+        }
+
+        public void PeopleSelecting()
+        {
+            ContainerHelper.RegisterInstance(_selectedPerson);
+            _thirdChild.UpdateThis();
         }
 
 

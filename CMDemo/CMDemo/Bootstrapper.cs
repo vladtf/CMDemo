@@ -58,7 +58,8 @@ namespace CMDemo
                 .Singleton<FirstChildViewModel>()
                 .Singleton<SecondChildViewModel>()
                 .Singleton<ThirdChildViewModel>()
-                .Singleton<PersonModel>();
+                .Singleton<PersonModel>()
+                .Singleton<ToUpdate>();
 
         }
 
