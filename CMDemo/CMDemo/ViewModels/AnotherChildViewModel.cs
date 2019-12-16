@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CMDemo.ViewModels
 {
-    class AnotherChildViewModel : Screen, IHandle<PersonModel>
+    public class AnotherChildViewModel : Screen, IHandle<PersonModel>
     {
         private readonly IEventAggregator _eventAggregator;
         public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel, FirstChildViewModel firstChildViewModel)
@@ -23,7 +23,8 @@ namespace CMDemo.ViewModels
         public void Handle(PersonModel message)
         {
             Person = message;
-            _eventAggregator.BeginPublishOnUIThread(new NavigateToAnotherView());
+            NavigateToAnotherView navigateToMessage = new NavigateToAnotherView();
+            _eventAggregator.PublishOnUIThread(navigateToMessage);
         }
 
         private PersonModel _person;
@@ -49,9 +50,12 @@ namespace CMDemo.ViewModels
             //_eventAggregator.PublishOnUIThread("Hello from Page");
         }
 
-        protected override void OnDeactivate(bool close)
-        {
-            _eventAggregator.Unsubscribe(this);
-        }
+        //Creating bugs, need to fix.
+
+        ////protected override void OnDeactivate(bool close)
+        ////{
+        ////    _eventAggregator.Unsubscribe(this);
+        ////}
+
     }
 }

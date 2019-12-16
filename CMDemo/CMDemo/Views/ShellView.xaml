@@ -54,13 +54,8 @@
         <!-- Row 3 -->
         <ComboBox Grid.Row="3" Grid.Column="1" x:Name="People"
                   SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"
-                  DisplayMemberPath="FullName">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <cal:ActionMessage MethodName="PeopleSelecting"/>
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </ComboBox>
+                  DisplayMemberPath="FullName" cal:Message.Attach="[Event SelectionChanged] = [Action PeopleSelecting]"/>
+
         <TextBox Grid.Row="3" Grid.Column="2" Name="SelectedPerson_LastName"/>
         <TextBox Grid.Row="3" Grid.Column="3" Name="SelectedPerson_FirstName"/>
         

@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<PersonModel>,IHandle<object>,IHandle<NavigateToAnotherView>
+    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<NavigateToAnotherView>,IHandle<object>
     {
 
         //Variables that we won't be changed/got directly ( only by using seters of geters).
@@ -27,13 +27,15 @@ namespace CMDemo.ViewModels
         private ThirdChildViewModel _thirdChild;
 
         private readonly IEventAggregator _eventAggregator;
+        private readonly AnotherChildViewModel _anotherChildViewModel;
 
-        AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
+        //AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
 
-        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, IEventAggregator eventAggregator)
+        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, IEventAggregator eventAggregator, AnotherChildViewModel anotherChildViewModel)
         {
             _thirdChild = thirdChildViewModel;
             _selectedPerson = personModel;
+            _anotherChildViewModel = anotherChildViewModel;
 
             //Adds new items to list people
             People.Add(new PersonModel { FirstName = "Will", LastName = "Smith" });
@@ -209,15 +211,6 @@ namespace CMDemo.ViewModels
             MessageBox.Show(message);
         }
 
-        public void Handle(PersonModel message)
-        {
-            
-        }
-
-        public void Handle(object sender)
-        {
-           ActivateItem(sender);
-        }
 
         public void MouseRightButtonUp(MouseButtonEventArgs args)
         {
@@ -228,12 +221,20 @@ namespace CMDemo.ViewModels
 
         public void MouseLeave()
         {
-            MessageBox.Show("Mouse leaved.");
+            //Annoying, just to be here.
+            //MessageBox.Show("Mouse leaved.");
         }
 
         public void Handle(NavigateToAnotherView message)
         {
             ActivateItem(_anotherChildViewModel);
+        }
+
+        public void Handle(object message)
+        {
+            //Don't use this way, create bugs and need to use Async publishing, better handle for different
+            //activating different message or try handle all the activation at the same time ( not suggested ).
+            ////ActivateItem(object);
         }
     }
 }
