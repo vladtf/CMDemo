@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using CMDemo.EventAggregatorMessages;
 using CMDemo.Models;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,18 @@ namespace CMDemo.ViewModels
     class AnotherChildViewModel : Screen, IHandle<PersonModel>
     {
         private readonly IEventAggregator _eventAggregator;
-        public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel)
+        public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel, FirstChildViewModel firstChildViewModel)
         {
+
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
-
             _person = personModel;
         }
 
         public void Handle(PersonModel message)
         {
             Person = message;
-            _eventAggregator.BeginPublishOnUIThread(this);
+            _eventAggregator.BeginPublishOnUIThread(new NavigateToAnotherView());
         }
 
         private PersonModel _person;

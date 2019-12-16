@@ -84,6 +84,7 @@
     <Compile Include="Models\ToUpdate.cs" />
     <Compile Include="ViewModels\AnotherChildViewModel.cs" />
     <Compile Include="ViewModels\FirstChildViewModel.cs" />
+    <Compile Include="EventAggregatorMessages\NavigateToAnotherView.cs" />
     <Compile Include="ViewModels\SecondChildViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ThirdChildViewModel.cs" />

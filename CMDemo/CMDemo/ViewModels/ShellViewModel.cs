@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Caliburn.Micro;
+using CMDemo.EventAggregatorMessages;
 using CMDemo.Helpers;
 using CMDemo.Models;
 using System;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<PersonModel>,IHandle<object>
+    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<PersonModel>,IHandle<object>,IHandle<NavigateToAnotherView>
     {
 
         //Variables that we won't be changed/got directly ( only by using seters of geters).
@@ -223,6 +224,16 @@ namespace CMDemo.ViewModels
             TextBlock sender = (TextBlock)args.Source;
             string message = sender.Text;
             MessageBox.Show(message);
+        }
+
+        public void MouseLeave()
+        {
+            MessageBox.Show("Mouse leaved.");
+        }
+
+        public void Handle(NavigateToAnotherView message)
+        {
+            ActivateItem(_anotherChildViewModel);
         }
     }
 }
