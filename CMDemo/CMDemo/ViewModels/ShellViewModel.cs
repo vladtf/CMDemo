@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>,IHandle<string>
+    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<PersonModel>
     {
 
         //Variables that we won't be changed/got directly ( only by using seters of geters).
@@ -152,8 +152,9 @@ namespace CMDemo.ViewModels
         }
         public void PeopleSelecting()
         {
-            ContainerHelper.RegisterInstance(_selectedPerson);
+            ContainerHelper.RegisterInstance(SelectedPerson);
             _thirdChild.UpdateThis();
+            _eventAggregator.PublishOnUIThread(SelectedPerson);
         }
 
         //a void method using lambda expression
@@ -188,6 +189,11 @@ namespace CMDemo.ViewModels
         public void Handle(string message)
         {
             MessageBox.Show(message);
+        }
+
+        public void Handle(PersonModel message)
+        {
+            
         }
     }
 }
