@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>
+    public class ShellViewModel : Conductor<object>,IHandle<string>
     {
 
         //Variables that we won't be changed/got directly ( only by using seters of geters).
@@ -23,11 +23,10 @@ namespace CMDemo.ViewModels
 
         private ThirdChildViewModel _thirdChild;
 
-        private ToUpdate _toUpdate;
+        private readonly IEventAggregator _eventAggregator;
 
-        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, ToUpdate toUpdate)
+        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, IEventAggregator eventAggregator)
         {
-            _toUpdate = toUpdate;
             _thirdChild = thirdChildViewModel;
             _selectedPerson = personModel;
 
@@ -35,6 +34,9 @@ namespace CMDemo.ViewModels
             People.Add(new PersonModel { FirstName = "Will", LastName = "Smith" });
             People.Add(new PersonModel { FirstName = "Sue", LastName = "Johnes" });
             People.Add(new PersonModel { FirstName = "Robert", LastName = "Jackson" });
+
+            _eventAggregator = eventAggregator;
+            _eventAggregator.Subscribe(this);
 
         }
 
@@ -99,19 +101,7 @@ namespace CMDemo.ViewModels
             }
         }
 
-
-        public bool NeedUpdate
-        {
-            get { return _toUpdate.NeedUpdate; }
-            set 
-            {
-                _toUpdate.NeedUpdate = value;
-                NotifyOfPropertyChange(() => NeedUpdate);
-            }
-        }
-
-
-
+                     
         //Explicitly check if button "CAN" be clicked, only if there are text to clear from textboxes. Below are different ways of implementation. (also with lambda expression =>).
         //public bool CanClearText(string firstName, string lastName) => !String.IsNullOrWhiteSpace(firstName) && !String.IsNullOrWhiteSpace(lastName);
         public bool CanClearText(string firstName, string lastName)
@@ -155,12 +145,16 @@ namespace CMDemo.ViewModels
             ActivateItem(_thirdChild);
         }
 
+        public void LoadAnotherPage()
+        {
+            AnotherChildViewModel anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
+            ActivateItem(anotherChildViewModel);
+        }
         public void PeopleSelecting()
         {
             ContainerHelper.RegisterInstance(_selectedPerson);
             _thirdChild.UpdateThis();
         }
-
 
         //a void method using lambda expression
         //public void ShowMessage() => MessageBox.Show("Using lambda expression.");
@@ -191,7 +185,9 @@ namespace CMDemo.ViewModels
             Console.WriteLine();
         }
 
-
-
+        public void Handle(string message)
+        {
+            MessageBox.Show(message);
+        }
     }
 }

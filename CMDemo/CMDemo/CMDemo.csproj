@@ -78,13 +78,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\ContainerHelper.cs" />
+    <Compile Include="Helpers\EventAggregatorHelper.cs" />
     <Compile Include="Helpers\PersonModelSetter.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\ToUpdate.cs" />
+    <Compile Include="ViewModels\AnotherChildViewModel.cs" />
     <Compile Include="ViewModels\FirstChildViewModel.cs" />
     <Compile Include="ViewModels\SecondChildViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ThirdChildViewModel.cs" />
+    <Compile Include="Views\AnotherChildView.xaml.cs">
+      <DependentUpon>AnotherChildView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FirstChildView.xaml.cs">
       <DependentUpon>FirstChildView.xaml</DependentUpon>
     </Compile>
@@ -128,6 +133,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\AnotherChildView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\FirstChildView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

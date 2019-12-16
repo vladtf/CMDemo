@@ -54,12 +54,13 @@ namespace CMDemo
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
+                .Singleton<IEventAggregator,EventAggregator>()
                 .Singleton<ShellViewModel>()
                 .Singleton<FirstChildViewModel>()
                 .Singleton<SecondChildViewModel>()
                 .Singleton<ThirdChildViewModel>()
-                .Singleton<PersonModel>()
-                .Singleton<ToUpdate>();
+                .Singleton<AnotherChildViewModel>()
+                .Singleton<PersonModel>();
 
         }
 

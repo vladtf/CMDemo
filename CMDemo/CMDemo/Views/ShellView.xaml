@@ -7,7 +7,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:CMDemo.Views"
         mc:Ignorable="d" FontSize="30"
-        Title="ShellView" Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+        Title="ShellView" Height="600" Width="1200" WindowStartupLocation="CenterScreen">
     
     <!-- The window shown on startup -->
     <Grid>
@@ -68,6 +68,7 @@
         <Button x:Name="LoadPageOne" Grid.Column="1" Grid.Row="5">Load First Page</Button>
         <Button x:Name="LoadPageTwo" Grid.Column="2" Grid.Row="5">Load Second Page</Button>
         <Button x:Name="LoadPageThree" Grid.Column="3" Grid.Row="5">Load Third Page</Button>
+        <Button x:Name="LoadAnotherPage" Grid.Column="4" Grid.Row="5">Load Another Page</Button>
         
         <!-- Row 6 -->
         <!-- Row 6 -->

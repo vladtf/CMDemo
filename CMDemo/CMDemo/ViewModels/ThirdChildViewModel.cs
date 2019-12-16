@@ -6,9 +6,8 @@ namespace CMDemo.ViewModels
 {
     public class ThirdChildViewModel : Screen
     {
-        public ThirdChildViewModel(PersonModel personModel, ToUpdate toUpdate)
+        public ThirdChildViewModel(PersonModel personModel)
         {
-            _toUpdate = toUpdate;
             _person = personModel;
         }
 
@@ -29,19 +28,6 @@ namespace CMDemo.ViewModels
             }
         }
 
-        private ToUpdate _toUpdate;
-
-
-        public bool NeedUpdate
-        {
-            get { return _toUpdate.NeedUpdate; }
-            set 
-            { 
-                _toUpdate.NeedUpdate = value;
-                if (value)
-                    UpdateThis();
-            }
-        }
 
 
 
