@@ -11,15 +11,18 @@ namespace CMDemo.ViewModels
     class AnotherChildViewModel : Screen, IHandle<PersonModel>
     {
         private readonly IEventAggregator _eventAggregator;
-        public AnotherChildViewModel(IEventAggregator eventAggregator)
+        public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
+
+            _person = personModel;
         }
 
         public void Handle(PersonModel message)
         {
             Person = message;
+            _eventAggregator.BeginPublishOnUIThread(this);
         }
 
         private PersonModel _person;
@@ -43,6 +46,11 @@ namespace CMDemo.ViewModels
         protected override void OnActivate()
         {
             //_eventAggregator.PublishOnUIThread("Hello from Page");
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            _eventAggregator.Unsubscribe(this);
         }
     }
 }

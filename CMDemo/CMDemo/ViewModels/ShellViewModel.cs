@@ -7,10 +7,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<PersonModel>
+    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<PersonModel>,IHandle<object>
     {
 
         //Variables that we won't be changed/got directly ( only by using seters of geters).
@@ -24,6 +26,8 @@ namespace CMDemo.ViewModels
         private ThirdChildViewModel _thirdChild;
 
         private readonly IEventAggregator _eventAggregator;
+
+        AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
 
         public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, IEventAggregator eventAggregator)
         {
@@ -97,7 +101,8 @@ namespace CMDemo.ViewModels
             set
             {
                 _selectedPerson = value;
-                NotifyOfPropertyChange(() => SelectedPerson); 
+                NotifyOfPropertyChange(() => SelectedPerson);
+                NotifyOfPropertyChange(() => CanLoadAnotherPage);
             }
         }
 
@@ -145,10 +150,22 @@ namespace CMDemo.ViewModels
             ActivateItem(_thirdChild);
         }
 
+        public bool CanLoadAnotherPage
+        {
+            get
+            {
+                bool output = false;
+                if (SelectedPerson.FirstName?.Length > 0 && SelectedPerson.LastName?.Length > 0)
+                {
+                    output = true;
+                }
+                return output;
+            }
+        }
+
         public void LoadAnotherPage()
         {
-            AnotherChildViewModel anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
-            ActivateItem(anotherChildViewModel);
+            ActivateItem(_anotherChildViewModel);
         }
         public void PeopleSelecting()
         {
@@ -194,6 +211,18 @@ namespace CMDemo.ViewModels
         public void Handle(PersonModel message)
         {
             
+        }
+
+        public void Handle(object sender)
+        {
+           ActivateItem(sender);
+        }
+
+        public void MouseRightButtonUp(MouseButtonEventArgs args)
+        {
+            TextBlock sender = (TextBlock)args.Source;
+            string message = sender.Text;
+            MessageBox.Show(message);
         }
     }
 }
