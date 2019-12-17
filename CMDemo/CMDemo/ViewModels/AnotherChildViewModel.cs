@@ -2,19 +2,15 @@
 using CMDemo.EventAggregatorMessages;
 using CMDemo.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CMDemo.ViewModels
 {
     public class AnotherChildViewModel : Screen, IHandle<PersonModel>
     {
         private readonly IEventAggregator _eventAggregator;
+
         public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel, FirstChildViewModel firstChildViewModel)
         {
-
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
             _person = personModel;
@@ -32,13 +28,12 @@ namespace CMDemo.ViewModels
         public PersonModel Person
         {
             get { return _person; }
-            set 
-            { 
+            set
+            {
                 _person = value;
                 NotifyOfPropertyChange(() => Person);
             }
         }
-
 
         public void Show()
         {
@@ -56,6 +51,5 @@ namespace CMDemo.ViewModels
         ////{
         ////    _eventAggregator.Unsubscribe(this);
         ////}
-
     }
 }

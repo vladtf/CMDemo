@@ -1,6 +1,5 @@
 ﻿using Caliburn.Micro;
 using CMDemo.Models;
-using System;
 
 namespace CMDemo.ViewModels
 {
@@ -13,7 +12,7 @@ namespace CMDemo.ViewModels
 
         public void UpdateThis()
         {
-             _person = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
+            _person = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
             NotifyOfPropertyChange(nameof(Person));
         }
 
@@ -22,14 +21,10 @@ namespace CMDemo.ViewModels
         public PersonModel Person
         {
             get { return _person; }
-            set 
-            { 
+            set
+            {
                 _person = value;
             }
         }
-
-
-
-
     }
 }

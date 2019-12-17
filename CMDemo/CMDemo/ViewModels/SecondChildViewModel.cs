@@ -1,14 +1,9 @@
 ﻿using Caliburn.Micro;
 using CMDemo.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CMDemo.ViewModels
 {
-    public class SecondChildViewModel:Screen
+    public class SecondChildViewModel : Screen
     {
         public SecondChildViewModel()
         {
@@ -19,11 +14,10 @@ namespace CMDemo.ViewModels
         public PersonModel Person
         {
             get { return _person; }
-            set 
-            { 
+            set
+            {
                 _person = value;
             }
         }
-
     }
 }

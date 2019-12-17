@@ -3,25 +3,18 @@ using CMDemo.Models;
 using CMDemo.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Caliburn.Micro.Autofac;
-using Autofac;
 
 namespace CMDemo
 {
     public class Bootstrapper : BootstrapperBase
     {
-
         private SimpleContainer _container = new SimpleContainer();
 
         public Bootstrapper()
         {
             Initialize();
         }
-
 
         //Set the window that would be shown on initializing the app.
         protected override void OnStartup(object sender, StartupEventArgs e)
@@ -37,7 +30,6 @@ namespace CMDemo
 
         //protected override void ConfigureContainer(ContainerBuilder builder)
         //{
-
         //    builder.RegisterType<ShellViewModel>().SingleInstance();
         //    builder.RegisterType<FirstChildViewModel>().SingleInstance();
         //    builder.RegisterType<SecondChildViewModel>().SingleInstance();
@@ -46,24 +38,20 @@ namespace CMDemo
 
         //}
 
-
-
         protected override void Configure()
         {
             _container.Instance(_container);
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator,EventAggregator>()
+                .Singleton<IEventAggregator, EventAggregator>()
                 .Singleton<ShellViewModel>()
                 .Singleton<FirstChildViewModel>()
                 .Singleton<SecondChildViewModel>()
                 .Singleton<ThirdChildViewModel>()
                 .Singleton<AnotherChildViewModel>()
                 .Singleton<PersonModel>();
-
         }
-
 
         protected override object GetInstance(Type service, string key)
         {
@@ -75,17 +63,9 @@ namespace CMDemo
             return _container.GetAllInstances(service);
         }
 
-        public SimpleContainer GetSimpleContainer()
-        {
-            return _container;
-        }
-
         protected override void BuildUp(object instance)
         {
             _container.BuildUp(instance);
         }
-
-        }
-
+    }
 }
-

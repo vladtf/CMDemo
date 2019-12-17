@@ -1,23 +1,19 @@
-﻿using Autofac;
-using Caliburn.Micro;
+﻿using Caliburn.Micro;
 using CMDemo.EventAggregatorMessages;
 using CMDemo.Helpers;
 using CMDemo.Models;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>,IHandle<string>,IHandle<NavigateToMessage>,IHandle<object>
+    public class ShellViewModel : Conductor<object>, IHandle<string>, IHandle<NavigateToMessage>, IHandle<object>
     {
-
         //Variables that we won't be changed/got directly ( only by using seters of geters).
         private string _firstName = "Will";
+
         private string _lastName;
 
         private BindableCollection<PersonModel> _people = new BindableCollection<PersonModel>();
@@ -44,9 +40,7 @@ namespace CMDemo.ViewModels
 
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
-
         }
-
 
         //Binded to FirstName textbox.
         public string FirstName
@@ -63,7 +57,6 @@ namespace CMDemo.ViewModels
             }
         }
 
-
         //Binded to LastName textbox.
         public string LastName
         {
@@ -78,7 +71,6 @@ namespace CMDemo.ViewModels
                 NotifyOfPropertyChange(() => FullName);
             }
         }
-
 
         //Binded to FullName textblock.
         public string FullName
@@ -96,7 +88,6 @@ namespace CMDemo.ViewModels
             set { _people = value; }
         }
 
-
         //Binded to selected item form ComboBox.
         public PersonModel SelectedPerson
         {
@@ -109,14 +100,13 @@ namespace CMDemo.ViewModels
             }
         }
 
-                     
         //Explicitly check if button "CAN" be clicked, only if there are text to clear from textboxes. Below are different ways of implementation. (also with lambda expression =>).
         //public bool CanClearText(string firstName, string lastName) => !String.IsNullOrWhiteSpace(firstName) && !String.IsNullOrWhiteSpace(lastName);
         public bool CanClearText(string firstName, string lastName)
         {
             //return !String.IsNullOrWhiteSpace(firstName) || !String.IsNullOrWhiteSpace(lastName);
 
-            if(String.IsNullOrWhiteSpace(firstName) && String.IsNullOrWhiteSpace(lastName))
+            if (String.IsNullOrWhiteSpace(firstName) && String.IsNullOrWhiteSpace(lastName))
             {
                 return false;
             }
@@ -132,7 +122,6 @@ namespace CMDemo.ViewModels
             FirstName = "";
             LastName = "";
         }
-
 
         //Events binded to buttons
         public void LoadPageOne()
@@ -171,6 +160,7 @@ namespace CMDemo.ViewModels
         {
             ActivateItem(_anotherChildViewModel);
         }
+
         public void PeopleSelecting()
         {
             ContainerHelper.RegisterInstance(SelectedPerson);
@@ -181,11 +171,9 @@ namespace CMDemo.ViewModels
         //a void method using lambda expression
         //public void ShowMessage() => MessageBox.Show("Using lambda expression.");
 
-
         //For debugging container features.
         public void ShowMessage()
         {
-
             //SimpleContainer simpleContainer = (SimpleContainer)IoC.GetInstance(typeof(SimpleContainer), null);
 
             //PersonModel personModel3 = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
@@ -212,7 +200,6 @@ namespace CMDemo.ViewModels
             MessageBox.Show(message);
         }
 
-
         public void MouseRightButtonUp(MouseButtonEventArgs args)
         {
             TextBlock sender = (TextBlock)args.Source;
@@ -226,8 +213,6 @@ namespace CMDemo.ViewModels
             //MessageBox.Show("Mouse leaved.");
         }
 
-
-
         //Old version.
 
         ////public void Handle(NavigateToAnotherView message)
@@ -238,24 +223,23 @@ namespace CMDemo.ViewModels
         //Universal way to navigate.
         public void Handle(NavigateToMessage message)
         {
-            switch(message.NavigateToEnum)
+            switch (message.NavigateToEnum)
             {
                 case NavigateToEnum.AnotherChildView:
                     ActivateItem(_anotherChildViewModel);
                     break;
+
                 case NavigateToEnum.ThirdChildView:
                     ActivateItem(_thirdChild);
                     break;
-               
             }
         }
+
         public void Handle(object message)
         {
             //Don't use this way, create bugs and need to use Async publishing, better handle for different
             //activating different message or try handle all the activation at the same time ( not suggested ).
             ////ActivateItem(object);
         }
-
-        
     }
 }
