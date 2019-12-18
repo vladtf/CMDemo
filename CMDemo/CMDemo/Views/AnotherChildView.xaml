@@ -10,5 +10,6 @@
         <TextBox x:Name="Person_FirstName" Margin="10" />
         <TextBox x:Name="Person_LastName" Margin="10" />
         <Button x:Name="Show" Height="50" Margin="10" />
+        <ContentControl x:Name="ActiveItem"/>
     </StackPanel>
 </UserControl>

@@ -174,6 +174,7 @@ namespace CMDemo.ViewModels
         //For debugging container features.
         public void ShowMessage()
         {
+            _eventAggregator.PublishOnUIThread(new NavigateToMessage(NavigateToEnum.ThirdChildView));
             //SimpleContainer simpleContainer = (SimpleContainer)IoC.GetInstance(typeof(SimpleContainer), null);
 
             //PersonModel personModel3 = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
@@ -229,9 +230,9 @@ namespace CMDemo.ViewModels
                     ActivateItem(_anotherChildViewModel);
                     break;
 
-                case NavigateToEnum.ThirdChildView:
-                    ActivateItem(_thirdChild);
-                    break;
+                //case NavigateToEnum.ThirdChildView:
+                //    ActivateItem(_thirdChild);
+                //    break;
             }
         }
 

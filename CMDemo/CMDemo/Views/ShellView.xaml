@@ -7,7 +7,7 @@
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:local="clr-namespace:CMDemo.Views"
         mc:Ignorable="d" FontSize="30"
-        Title="ShellView" Height="600" Width="1200" WindowStartupLocation="CenterScreen">
+        Title="ShellView" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
 
     <!-- The window shown on startup -->
     <Grid>

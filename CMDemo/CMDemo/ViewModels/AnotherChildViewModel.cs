@@ -5,15 +5,16 @@ using System;
 
 namespace CMDemo.ViewModels
 {
-    public class AnotherChildViewModel : Screen, IHandle<PersonModel>
+    public class AnotherChildViewModel : Conductor<Object>, IHandle<PersonModel>,IHandle<NavigateToMessage>
     {
         private readonly IEventAggregator _eventAggregator;
 
-        public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel, FirstChildViewModel firstChildViewModel)
+        public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel, FirstChildViewModel firstChildViewModel, ThirdChildViewModel thirdChildViewModel)
         {
             _eventAggregator = eventAggregator;
             _eventAggregator.Subscribe(this);
             _person = personModel;
+            _thirdChildViewModel = thirdChildViewModel;
         }
 
         public void Handle(PersonModel message)
@@ -24,6 +25,7 @@ namespace CMDemo.ViewModels
         }
 
         private PersonModel _person;
+        private readonly ThirdChildViewModel _thirdChildViewModel;
 
         public PersonModel Person
         {
@@ -43,6 +45,13 @@ namespace CMDemo.ViewModels
         protected override void OnActivate()
         {
             //_eventAggregator.PublishOnUIThread("Hello from Page");
+        }
+
+        public void Handle(NavigateToMessage message)
+        {
+            if (message.NavigateToEnum == NavigateToEnum.ThirdChildView)
+                ActivateItem(_thirdChildViewModel);
+
         }
 
         //Creating bugs, need to fix.
