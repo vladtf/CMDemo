@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace CMDemo.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<string>, IHandle<NavigateToMessage>, IHandle<object>
+    public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<string>, IHandle<NavigateToMessage>, IHandle<object>
     {
         //Variables that we won't be changed/got directly ( only by using seters of geters).
         private string _firstName = "Will";
@@ -24,14 +24,16 @@ namespace CMDemo.ViewModels
 
         private readonly IEventAggregator _eventAggregator;
         private readonly AnotherChildViewModel _anotherChildViewModel;
+        private readonly IWindowManager _windowManager;
 
         //AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
 
-        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, IEventAggregator eventAggregator, AnotherChildViewModel anotherChildViewModel)
+        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, IEventAggregator eventAggregator, AnotherChildViewModel anotherChildViewModel,IWindowManager windowManager)
         {
             _thirdChild = thirdChildViewModel;
             _selectedPerson = personModel;
             _anotherChildViewModel = anotherChildViewModel;
+            _windowManager = windowManager;
 
             //Adds new items to list people
             People.Add(new PersonModel { FirstName = "Will", LastName = "Smith" });
@@ -134,7 +136,8 @@ namespace CMDemo.ViewModels
             ActivateItem(null);
             SecondChildViewModel _secondChild = IoC.Get<SecondChildViewModel>();
             _secondChild.Person = SelectedPerson;
-            ActivateItem(_secondChild);
+            _windowManager.ShowWindow(_secondChild);
+
         }
 
         public void LoadPageThree()
@@ -159,6 +162,8 @@ namespace CMDemo.ViewModels
         public void LoadAnotherPage()
         {
             ActivateItem(_anotherChildViewModel);
+            _windowManager.ShowWindow(_anotherChildViewModel);
+            _windowManager.ShowWindow(_anotherChildViewModel);
         }
 
         public void PeopleSelecting()
@@ -242,5 +247,14 @@ namespace CMDemo.ViewModels
             //activating different message or try handle all the activation at the same time ( not suggested ).
             ////ActivateItem(object);
         }
+
+        public void AddChild(RoutedEventArgs eventargs)
+        {
+            ActivateItem(_anotherChildViewModel);
+            ContentControl contentControl = (ContentControl)eventargs.Source;
+            contentControl.Content = this.ActiveItem;
+            Console.WriteLine();
+        }
+
     }
 }
