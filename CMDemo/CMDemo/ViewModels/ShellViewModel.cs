@@ -28,19 +28,19 @@ namespace CMDemo.ViewModels
 
         //AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
 
-        public ShellViewModel(ThirdChildViewModel thirdChildViewModel, PersonModel personModel, IEventAggregator eventAggregator, AnotherChildViewModel anotherChildViewModel,IWindowManager windowManager)
+        public ShellViewModel()
         {
-            _thirdChild = thirdChildViewModel;
-            _selectedPerson = personModel;
-            _anotherChildViewModel = anotherChildViewModel;
-            _windowManager = windowManager;
+            _thirdChild = (ThirdChildViewModel)IoC.GetInstance(typeof(ThirdChildViewModel), null);
+            _selectedPerson = (PersonModel)IoC.GetInstance(typeof(PersonModel), null);
+            _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
+            _windowManager = (IWindowManager)IoC.GetInstance(typeof(IWindowManager), null);
 
             //Adds new items to list people
             People.Add(new PersonModel { FirstName = "Will", LastName = "Smith" });
             People.Add(new PersonModel { FirstName = "Sue", LastName = "Johnes" });
             People.Add(new PersonModel { FirstName = "Robert", LastName = "Jackson" });
 
-            _eventAggregator = eventAggregator;
+            _eventAggregator = (IEventAggregator)IoC.GetInstance(typeof(IEventAggregator), null);
             _eventAggregator.Subscribe(this);
         }
 
