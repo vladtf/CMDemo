@@ -3,6 +3,7 @@ using CMDemo.EventAggregatorMessages;
 using CMDemo.Helpers;
 using CMDemo.Models;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -45,6 +46,15 @@ namespace CMDemo.ViewModels
 
             _eventAggregator = (IEventAggregator)IoC.GetInstance(typeof(IEventAggregator), null);
             _eventAggregator.Subscribe(this);
+
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    Task.Delay(1000).Wait();
+                    Timer++;
+                }
+            }); 
         }
 
         //Binded to FirstName textbox.
@@ -268,6 +278,14 @@ namespace CMDemo.ViewModels
             set { Set(ref _selectedScreen, value); }
         }
 
+
+        private int _timer;
+
+        public int Timer
+        {
+            get { return _timer; }
+            set { Set(ref _timer, value); }
+        }
 
 
 
