@@ -20,12 +20,15 @@ namespace CMDemo.ViewModels
 
         private PersonModel _selectedPerson;
 
-        private ThirdChildViewModel _thirdChild;
+        private readonly ThirdChildViewModel _thirdChild;
 
         private readonly IEventAggregator _eventAggregator;
         private readonly AnotherChildViewModel _anotherChildViewModel;
         private readonly IWindowManager _windowManager;
 
+
+        public AnotherChildViewModel AnotherChildViewModel => _anotherChildViewModel;
+        public ThirdChildViewModel ThirdChild=> _thirdChild;
         //AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
 
         public ShellViewModel()
@@ -159,17 +162,18 @@ namespace CMDemo.ViewModels
             }
         }
 
+
         public void LoadAnotherPage()
         {
-            ActivateItem(_anotherChildViewModel);
-            _windowManager.ShowWindow(_anotherChildViewModel);
-            _windowManager.ShowWindow(_anotherChildViewModel);
+            ActivateItem(AnotherChildViewModel);
+            _windowManager.ShowWindow(AnotherChildViewModel);
+            _windowManager.ShowWindow(AnotherChildViewModel);
         }
 
         public void PeopleSelecting()
         {
             ContainerHelper.RegisterInstance(SelectedPerson);
-            _thirdChild.UpdateThis();
+            ThirdChild.UpdateThis();
             _eventAggregator.PublishOnUIThread(SelectedPerson);
         }
 
@@ -232,7 +236,7 @@ namespace CMDemo.ViewModels
             switch (message.NavigateToEnum)
             {
                 case NavigateToEnum.AnotherChildView:
-                    ActivateItem(_anotherChildViewModel);
+                    ActivateItem(AnotherChildViewModel);
                     break;
 
                 //case NavigateToEnum.ThirdChildView:
@@ -250,11 +254,13 @@ namespace CMDemo.ViewModels
 
         public void AddChild(RoutedEventArgs eventargs)
         {
-            ActivateItem(_anotherChildViewModel);
-            ContentControl contentControl = (ContentControl)eventargs.Source;
-            contentControl.Content = this.ActiveItem;
-            Console.WriteLine();
+            //ActivateItem(_anotherChildViewModel);
+            //ContentControl contentControl = (ContentControl)eventargs.Source;
+            //contentControl.Content = this.ActiveItem;
+            //Console.WriteLine();
         }
+
+        
 
     }
 }

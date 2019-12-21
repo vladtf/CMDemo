@@ -73,11 +73,11 @@
         <!-- Row 6 -->
         <!-- Row 6 -->
         <ContentControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
-                        x:Name="ActiveItem" />
+                        cal:View.Model="{Binding ThirdChild}" />
         <ListBox Grid.Row="6" Grid.Column="3" ItemsSource="{Binding Path=People,Mode=TwoWay}"
                  DisplayMemberPath="FullName" SelectedItem="{Binding Path=SelectedPerson,Mode=TwoWay}" />
 
-        <ContentControl Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" 
+        <ContentControl Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" cal:View.Model="{Binding AnotherChildViewModel}"
                         cal:Message.Attach="[Event Loaded] = [Action AddChild($eventArgs)]"/>
     </Grid>
 </Window>
