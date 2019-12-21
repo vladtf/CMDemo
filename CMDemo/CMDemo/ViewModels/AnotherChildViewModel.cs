@@ -5,7 +5,7 @@ using System;
 
 namespace CMDemo.ViewModels
 {
-    public class AnotherChildViewModel : Conductor<Object>, IHandle<PersonModel>,IHandle<NavigateToMessage>
+    public class AnotherChildViewModel : Conductor<Object>, IHandle<PersonModel>, IHandle<NavigateToMessage>
     {
         private readonly IEventAggregator _eventAggregator;
 
@@ -51,7 +51,6 @@ namespace CMDemo.ViewModels
         {
             if (message.NavigateToEnum == NavigateToEnum.ThirdChildView)
                 ActivateItem(_thirdChildViewModel);
-
         }
 
         //Creating bugs, need to fix.

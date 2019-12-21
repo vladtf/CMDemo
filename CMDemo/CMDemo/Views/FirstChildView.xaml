@@ -15,9 +15,9 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="40" x:Name="PersonModel_FirstName">
-            First Name</TextBlock>
-        <TextBlock Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Margin="0,20,0,0" x:Name="PersonModel_LastName">
-            Last Name</TextBlock>
+        <TextBox Grid.Row="1" HorizontalAlignment="Center" FontSize="40" x:Name="PersonModel_FirstName">
+            First Name</TextBox>
+        <TextBox Grid.Row="2" HorizontalAlignment="Center" FontSize="40" Margin="0,20,0,0" x:Name="PersonModel_LastName">
+            Last Name</TextBox>
     </Grid>
 </UserControl>

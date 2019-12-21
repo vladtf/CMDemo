@@ -12,23 +12,23 @@ namespace CMDemo.ViewModels
     public class ShellViewModel : Conductor<object>.Collection.OneActive, IHandle<string>, IHandle<NavigateToMessage>, IHandle<object>
     {
         //Variables that we won't be changed/got directly ( only by using seters of geters).
+        #region Private fields
         private string _firstName = "Will";
-
         private string _lastName;
 
         private BindableCollection<PersonModel> _people = new BindableCollection<PersonModel>();
-
         private PersonModel _selectedPerson;
 
         private readonly ThirdChildViewModel _thirdChild;
+        private readonly AnotherChildViewModel _anotherChildViewModel;
 
         private readonly IEventAggregator _eventAggregator;
-        private readonly AnotherChildViewModel _anotherChildViewModel;
         private readonly IWindowManager _windowManager;
 
+        #endregion
 
         public AnotherChildViewModel AnotherChildViewModel => _anotherChildViewModel;
-        public ThirdChildViewModel ThirdChild=> _thirdChild;
+        public ThirdChildViewModel ThirdChild => _thirdChild;
         //AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
 
         public ShellViewModel()
@@ -131,7 +131,7 @@ namespace CMDemo.ViewModels
         //Events binded to buttons
         public void LoadPageOne()
         {
-            ActivateItem(new FirstChildViewModel(SelectedPerson));
+            SelectedScreen = new FirstChildViewModel(SelectedPerson);
         }
 
         public void LoadPageTwo()
@@ -140,7 +140,6 @@ namespace CMDemo.ViewModels
             SecondChildViewModel _secondChild = IoC.Get<SecondChildViewModel>();
             _secondChild.Person = SelectedPerson;
             _windowManager.ShowWindow(_secondChild);
-
         }
 
         public void LoadPageThree()
@@ -162,11 +161,9 @@ namespace CMDemo.ViewModels
             }
         }
 
-
         public void LoadAnotherPage()
         {
             ActivateItem(AnotherChildViewModel);
-            _windowManager.ShowWindow(AnotherChildViewModel);
             _windowManager.ShowWindow(AnotherChildViewModel);
         }
 
@@ -239,9 +236,9 @@ namespace CMDemo.ViewModels
                     ActivateItem(AnotherChildViewModel);
                     break;
 
-                //case NavigateToEnum.ThirdChildView:
-                //    ActivateItem(_thirdChild);
-                //    break;
+                    //case NavigateToEnum.ThirdChildView:
+                    //    ActivateItem(_thirdChild);
+                    //    break;
             }
         }
 
@@ -258,9 +255,21 @@ namespace CMDemo.ViewModels
             //ContentControl contentControl = (ContentControl)eventargs.Source;
             //contentControl.Content = this.ActiveItem;
             //Console.WriteLine();
+            
+            
         }
 
-        
+
+        private Screen _selectedScreen;
+
+        public Screen SelectedScreen
+        {
+            get { return _selectedScreen; }
+            set { Set(ref _selectedScreen, value); }
+        }
+
+
+
 
     }
 }
