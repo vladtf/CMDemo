@@ -289,5 +289,15 @@ namespace CMDemo.ViewModels
 
 
 
+        private bool _isChecked = false;
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set { Set(ref _isChecked, value); }
+        }
+
+
+
     }
 }
