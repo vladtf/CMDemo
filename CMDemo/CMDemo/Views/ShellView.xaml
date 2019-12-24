@@ -11,92 +11,13 @@
         mc:Ignorable="d" FontSize="30"
         Title="ShellView" Height="800" Width="1200" WindowStartupLocation="CenterScreen">
 
-    <!-- The window shown on startup -->
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="20" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" FontSize="20">
+            <MenuItem Header="_Home"/>
+            </Menu>
+        <Grid>
+            <ContentControl cal:View.Model="{Binding HomeView}"/>
+        </Grid>
+        </DockPanel>
 
-        <!-- Row 1 -->
-        <TextBlock Text="{Binding Path=FullName, Mode=OneWay}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-                   cal:Message.Attach="[Event PreviewMouseRightButtonUp] = [Action MouseRightButtonUp($eventArgs)];
-                   [Event MouseLeave] = [Action MouseLeave]">
-        </TextBlock>
-
-        <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Timer}"/>
-
-        <Button  Grid.Row="1" Grid.Column="5" MinWidth="100" Content="Show">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="Click">
-                    <cal:ActionMessage MethodName="ShowMessage" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </Button>
-
-        <!-- Row 2 -->
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="FirstName" MinWidth="100"></TextBox>
-        <TextBox Grid.Row="2" Grid.Column="2" x:Name="LastName" MinWidth="100"></TextBox>
-
-        <Viewbox Grid.Row="2" Grid.Column="3">
-            <CheckBox  IsChecked="{Binding IsChecked}"/>
-        </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="4">
-            <CheckBox  IsChecked="{Binding IsChecked}" />
-        </Viewbox>
-
-        <!-- Row 3 -->
-        <ComboBox Grid.Row="3" Grid.Column="1" x:Name="People" 
-                  SelectedItem="{Binding Path=SelectedPerson, Mode=TwoWay}"
-                  DisplayMemberPath="FullName" cal:Message.Attach="[Event SelectionChanged] = [Action PeopleSelecting]" HorizontalAlignment="Left" Width="205" />
-
-
-        <TextBox Grid.Row="3" Grid.Column="2" Name="SelectedPerson_LastName" />
-        <TextBox Grid.Row="3" Grid.Column="3" Name="SelectedPerson_FirstName" />
-
-        <!-- Row 4 -->
-        <Button Grid.Row="4" Grid.Column="1" x:Name="ClearText">Clear Names</Button>
-
-        <!-- Row 5 -->
-        <Button x:Name="LoadPageOne" Grid.Column="1" Grid.Row="5">Load First Page</Button>
-        <Button x:Name="LoadPageTwo" Grid.Column="2" Grid.Row="5">Load Second Page</Button>
-        <Button x:Name="LoadPageThree" Grid.Column="3" Grid.Row="5">Load Third Page</Button>
-        <Button x:Name="LoadAnotherPage" Grid.Column="4" Grid.Row="5">Load Another Page</Button>
-
-        <!-- Row 6 -->
-        <!-- Row 6 -->
-        <ContentControl Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2"
-                        cal:View.Model="{Binding SelectedScreen}" />
-        <ListBox Grid.Row="6" Grid.Column="3" ItemsSource="{Binding Path=People,Mode=TwoWay}"
-                 DisplayMemberPath="FullName" SelectedItem="{Binding Path=SelectedPerson,Mode=TwoWay}"/>
-
-        <ContentControl Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" cal:View.Model="{Binding AnotherChildViewModel}"
-                        cal:Message.Attach="[Event Loaded] = [Action AddChild($eventArgs)]" />
-        
-        <!-- Row 7 -->
-
-        <DataGrid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding People}" AlternatingRowBackground="AntiqueWhite">
-            
-        </DataGrid>
-        
-    </Grid>
 </Window>
