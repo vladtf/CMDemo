@@ -32,6 +32,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
@@ -90,5 +91,12 @@
 
         <ContentControl Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="2" cal:View.Model="{Binding AnotherChildViewModel}"
                         cal:Message.Attach="[Event Loaded] = [Action AddChild($eventArgs)]" />
+        
+        <!-- Row 7 -->
+
+        <DataGrid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" ItemsSource="{Binding People}" AlternatingRowBackground="AntiqueWhite">
+            
+        </DataGrid>
+        
     </Grid>
 </Window>
