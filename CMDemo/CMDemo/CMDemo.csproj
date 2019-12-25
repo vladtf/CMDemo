@@ -90,6 +90,7 @@
     <Compile Include="ViewModels\SecondChildViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\ThirdChildViewModel.cs" />
+    <Compile Include="ViewModels\WorkViewModel.cs" />
     <Compile Include="Views\AnotherChildView.xaml.cs">
       <DependentUpon>AnotherChildView.xaml</DependentUpon>
     </Compile>
@@ -107,6 +108,9 @@
     </Compile>
     <Compile Include="Views\ThirdChildView.xaml.cs">
       <DependentUpon>ThirdChildView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkView.xaml.cs">
+      <DependentUpon>WorkView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ThirdChildView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

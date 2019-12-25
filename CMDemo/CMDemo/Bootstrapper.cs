@@ -50,6 +50,7 @@ namespace CMDemo
                 .Singleton<SecondChildViewModel>()
                 .Singleton<ThirdChildViewModel>()
                 .Singleton<AnotherChildViewModel>()
+                .Singleton<WorkViewModel>()
                 .Singleton<HomeViewModel>()
                 .Singleton<PersonModel>();
         }
