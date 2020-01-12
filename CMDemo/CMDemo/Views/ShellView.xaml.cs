@@ -11,6 +11,5 @@ namespace CMDemo.Views
         {
             InitializeComponent();
         }
-
     }
 }

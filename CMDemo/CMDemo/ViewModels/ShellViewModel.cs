@@ -1,12 +1,4 @@
 ﻿using Caliburn.Micro;
-using CMDemo.EventAggregatorMessages;
-using CMDemo.Helpers;
-using CMDemo.Models;
-using System;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace CMDemo.ViewModels
 {
@@ -14,11 +6,11 @@ namespace CMDemo.ViewModels
     {
         public HomeViewModel HomeView { get; set; } = (HomeViewModel)IoC.GetInstance(typeof(HomeViewModel), null);
         public WorkViewModel WorkView { get; set; } = (WorkViewModel)IoC.GetInstance(typeof(WorkViewModel), null);
+
         public ShellViewModel()
         {
             ActivateItem(HomeView);
         }
-
 
         public void Home()
         {
@@ -29,7 +21,5 @@ namespace CMDemo.ViewModels
         {
             ActivateItem(WorkView);
         }
-
-
     }
 }

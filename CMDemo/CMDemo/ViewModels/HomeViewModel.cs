@@ -3,9 +3,6 @@ using CMDemo.EventAggregatorMessages;
 using CMDemo.Helpers;
 using CMDemo.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,7 +13,9 @@ namespace CMDemo.ViewModels
     public class HomeViewModel : Conductor<object>, IHandle<string>, IHandle<NavigateToMessage>, IHandle<object>
     {
         //Variables that we won't be changed/got directly ( only by using seters of geters).
+
         #region Private fields
+
         private string _firstName = "Will";
         private string _lastName;
 
@@ -29,7 +28,7 @@ namespace CMDemo.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IWindowManager _windowManager;
 
-        #endregion
+        #endregion Private fields
 
         public AnotherChildViewModel AnotherChildViewModel => _anotherChildViewModel;
         public ThirdChildViewModel ThirdChild => _thirdChild;
@@ -268,10 +267,7 @@ namespace CMDemo.ViewModels
             //ContentControl contentControl = (ContentControl)eventargs.Source;
             //contentControl.Content = this.ActiveItem;
             //Console.WriteLine();
-
-
         }
-
 
         private Screen _selectedScreen;
 
@@ -281,7 +277,6 @@ namespace CMDemo.ViewModels
             set { Set(ref _selectedScreen, value); }
         }
 
-
         private int _timer;
 
         public int Timer
@@ -290,8 +285,6 @@ namespace CMDemo.ViewModels
             set { Set(ref _timer, value); }
         }
 
-
-
         private bool _isChecked = false;
 
         public bool IsChecked
@@ -299,6 +292,5 @@ namespace CMDemo.ViewModels
             get { return _isChecked; }
             set { Set(ref _isChecked, value); }
         }
-
     }
 }

@@ -13,12 +13,11 @@
 
         <DockPanel>
             <Menu DockPanel.Dock="Top" FontSize="20">
-            <MenuItem Header="_Home" Name="Home"/>
-            <MenuItem Header="_Work" Name="Work"/>
+            <MenuItem Header="_Home" Name="Home" />
+            <MenuItem Header="_Work" Name="Work" />
         </Menu>
         <Grid>
-            <ContentControl cal:View.Model="{Binding ActiveItem}"/>
+            <ContentControl cal:View.Model="{Binding ActiveItem}" />
         </Grid>
         </DockPanel>
-
 </Window>

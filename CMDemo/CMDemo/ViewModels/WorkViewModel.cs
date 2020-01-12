@@ -1,8 +1,5 @@
 ﻿using Caliburn.Micro;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CMDemo.ViewModels
@@ -21,7 +18,6 @@ namespace CMDemo.ViewModels
             });
         }
 
-
         private Double _progress = 20;
 
         public Double Progress
@@ -32,7 +28,7 @@ namespace CMDemo.ViewModels
 
         public void Increase()
         {
-            if (Progress<100)
+            if (Progress < 100)
             {
                 Progress++;
             }
@@ -40,7 +36,7 @@ namespace CMDemo.ViewModels
 
         public void Decrease()
         {
-            if (Progress>1)
+            if (Progress > 1)
             {
                 Progress--;
             }
@@ -50,6 +46,5 @@ namespace CMDemo.ViewModels
         {
             Progress = 0;
         }
-
     }
 }
