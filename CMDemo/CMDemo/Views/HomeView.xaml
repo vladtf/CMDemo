@@ -80,11 +80,24 @@
         <!-- Row 2 -->
         <TextBox Grid.Row="2" Grid.Column="1" x:Name="FirstName" MinWidth="100"></TextBox>
         <TextBox Grid.Row="2" Grid.Column="2" x:Name="LastName" MinWidth="100"></TextBox>
+        <TextBlock Grid.Row="2" Grid.Column="3" x:Name="CustonTextBlock" MinWidth="100">
+            <TextBlock.Text>Custom TextBlock</TextBlock.Text>
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="Red"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Blue"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
-        <Viewbox Grid.Row="2" Grid.Column="3">
+        <Viewbox Grid.Row="2" Grid.Column="4">
             <CheckBox  IsChecked="{Binding IsChecked}" />
         </Viewbox>
-        <Viewbox Grid.Row="2" Grid.Column="4">
+        <Viewbox Grid.Row="2" Grid.Column="5">
             <CheckBox  IsChecked="{Binding IsChecked}" />
         </Viewbox>
 
