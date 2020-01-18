@@ -45,12 +45,25 @@
 
         <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Timer}" />
 
-        <Button  Grid.Row="1" Grid.Column="5" MinWidth="100" Content="Show">
+        <Button  Grid.Row="1" Grid.Column="5" MinWidth="100" Content="Show"
+                 Name="AnimatedButton">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <cal:ActionMessage MethodName="ShowMessage"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="AnimatedButton"
+                                             Storyboard.TargetProperty="Opacity"
+                                             From="1.0" To="0.0"
+                                             AutoReverse="True" RepeatBehavior="Forever"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
         </Button>
 
         <!-- Row 2 -->
