@@ -1,2 +1,2 @@
 # CMDemo
-Learning MVVM with Caliburn Micro.
+Learning MVVM with Caliburn Micro ( sandbox application ).
