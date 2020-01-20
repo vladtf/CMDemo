@@ -41,10 +41,21 @@
         <TextBlock Text="{Binding Path=FullName, Mode=OneWay}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                    cal:Message.Attach="[Event PreviewMouseRightButtonUp] = [Action MouseRightButtonUp($eventArgs)];
                    [Event MouseLeave] = [Action MouseLeave]">
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=ClearText,Path=IsMouseOver}"
+                                     Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                    </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
         </TextBlock>
 
         <TextBlock Grid.Row="1" Grid.Column="4" Text="{Binding Timer}" />
 
+        <!-- Animated Button -->
         <Button  Grid.Row="1" Grid.Column="5" MinWidth="100" Content="Show"
                  Name="AnimatedButton">
             <i:Interaction.Triggers>
@@ -57,7 +68,7 @@
             </Button.RenderTransform>
             <Button.Triggers>
                 <EventTrigger RoutedEvent="Loaded">
-                    <BeginStoryboard>
+                    <BeginStoryboard x:Name="MyStoryboard">
                         <Storyboard>
                             <DoubleAnimation Storyboard.TargetName="AnimatedButton"
                                              Storyboard.TargetProperty="Opacity"
@@ -73,6 +84,12 @@
                                              RepeatBehavior="Forever"/>
                         </Storyboard>
                     </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <PauseStoryboard BeginStoryboardName="MyStoryboard"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <ResumeStoryboard BeginStoryboardName="MyStoryboard"/>
                 </EventTrigger>
             </Button.Triggers>
         </Button>
@@ -110,7 +127,9 @@
         <TextBox Grid.Row="3" Grid.Column="3" Name="SelectedPerson_FirstName" />
 
         <!-- Row 4 -->
-        <Button Grid.Row="4" Grid.Column="1" x:Name="ClearText">Clear Names</Button>
+        <Button Grid.Row="4" Grid.Column="1" x:Name="ClearText">
+            <Underline>Clear</Underline>
+        </Button>
 
         <!-- Row 5 -->
         <Button x:Name="LoadPageOne" Grid.Column="1" Grid.Row="5">Load First Page</Button>
