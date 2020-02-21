@@ -3,6 +3,7 @@ using CMDemo.EventAggregatorMessages;
 using CMDemo.Helpers;
 using CMDemo.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ namespace CMDemo.ViewModels
     public class HomeViewModel : Conductor<object>, IHandle<string>, IHandle<NavigateToMessage>, IHandle<object>
     {
         //Variables that we won't be changed/got directly ( only by using seters of geters).
+
 
         #region Private fields
 
@@ -30,8 +32,11 @@ namespace CMDemo.ViewModels
 
         #endregion Private fields
 
+        #region Public fields
         public AnotherChildViewModel AnotherChildViewModel => _anotherChildViewModel;
         public ThirdChildViewModel ThirdChild => _thirdChild;
+        #endregion
+
         //AnotherChildViewModel _anotherChildViewModel = (AnotherChildViewModel)IoC.GetInstance(typeof(AnotherChildViewModel), null);
 
         public HomeViewModel()

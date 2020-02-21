@@ -5,12 +5,12 @@ namespace CMDemo.ViewModels
 {
     public class SecondChildViewModel : Screen
     {
-        public SecondChildViewModel()
-        {
-        }
 
+        #region Private fiels
         private PersonModel _person;
+        #endregion
 
+        #region Public fields
         public PersonModel Person
         {
             get { return _person; }
@@ -19,5 +19,12 @@ namespace CMDemo.ViewModels
                 _person = value;
             }
         }
+        #endregion
+
+        public SecondChildViewModel()
+        {
+        }
+
+
     }
 }

@@ -7,7 +7,24 @@ namespace CMDemo.ViewModels
 {
     public class AnotherChildViewModel : Conductor<Object>, IHandle<PersonModel>, IHandle<NavigateToMessage>
     {
+
+        #region Private fiels
+        private readonly ThirdChildViewModel _thirdChildViewModel;
         private readonly IEventAggregator _eventAggregator;
+        private PersonModel _person;
+        #endregion
+        #region Public fields
+        public PersonModel Person
+        {
+            get { return _person; }
+            set
+            {
+                _person = value;
+                NotifyOfPropertyChange(() => Person);
+            }
+        }
+        #endregion
+
 
         public AnotherChildViewModel(IEventAggregator eventAggregator, PersonModel personModel, FirstChildViewModel firstChildViewModel, ThirdChildViewModel thirdChildViewModel)
         {
@@ -24,18 +41,7 @@ namespace CMDemo.ViewModels
             _eventAggregator.PublishOnUIThread(navigateToMessage);
         }
 
-        private PersonModel _person;
-        private readonly ThirdChildViewModel _thirdChildViewModel;
-
-        public PersonModel Person
-        {
-            get { return _person; }
-            set
-            {
-                _person = value;
-                NotifyOfPropertyChange(() => Person);
-            }
-        }
+        
 
         public void Show()
         {

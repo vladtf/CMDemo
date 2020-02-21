@@ -6,6 +6,13 @@ namespace CMDemo.ViewModels
 {
     public class WorkViewModel : Screen
     {
+        #region Private fiels
+        private Double _progress = 20;
+        #endregion
+        #region Public fields
+
+        #endregion
+
         public WorkViewModel()
         {
             Task.Factory.StartNew(() =>
@@ -13,38 +20,31 @@ namespace CMDemo.ViewModels
                 while (true)
                 {
                     Task.Delay(100).Wait();
-                    Progress += 0.1;
+                    //Progress += 0.1;
                 }
             });
         }
 
-        private Double _progress = 20;
-
-        public Double Progress
-        {
-            get { return _progress; }
-            set { Set(ref _progress, value); }
-        }
 
         public void Increase()
         {
-            if (Progress < 100)
-            {
-                Progress++;
-            }
+            //if (Progress < 100)
+            //{
+            //    Progress++;
+            //}
         }
 
         public void Decrease()
         {
-            if (Progress > 1)
-            {
-                Progress--;
-            }
+            //if (Progress > 1)
+            //{
+            //    Progress--;
+            //}
         }
 
         public void MouseDown()
         {
-            Progress = 0;
+            //Progress = 0;
         }
     }
 }
